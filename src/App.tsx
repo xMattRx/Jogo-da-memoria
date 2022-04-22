@@ -6,6 +6,8 @@ import { InfoItem } from "./components/InfoItem";
 import RestartIcon from './svgs/restart.svg'
 import { GridItemType } from "./types/GridItemType";
 import {items} from './data/items'
+import { GridItem } from "./components/GridItem";
+import { formatTimeElapsed } from "./helpers/formatTimeElapsed";
 
 
 const App = () => {
@@ -20,6 +22,15 @@ const App = () => {
   useEffect(() => {
     resetAndCreateGrid();
   },[])
+
+  useEffect(() => {
+    const timer = setInterval(()=>{
+      if(playing){
+        setTimeElapsed(timeElapsed + 1);
+      }
+    }, 1000)
+    return () => clearInterval(timer);
+  },[playing, timeElapsed])
 
   const resetAndCreateGrid = () =>{
     setTimeElapsed(0);
@@ -49,6 +60,10 @@ const App = () => {
     setPlaying(true);
   }
 
+  const handleItemClick = (index: number) => {
+
+  }
+
   return(
     <Container>
       <Info>
@@ -57,7 +72,7 @@ const App = () => {
         </LogoLink>
 
         <InfoArea>
-          <InfoItem label="Tempo" value="00:00" />
+          <InfoItem label="Tempo" value={formatTimeElapsed(timeElapsed)} />
           <InfoItem label="Movimentos" value="0" />
         </InfoArea>
         
@@ -65,7 +80,13 @@ const App = () => {
       </Info>
       <GridArea>
         <Grid>
-
+            {gridItems.map((item, index)=>(
+              <GridItem
+                key={index}
+                item={item}
+                onClick={()=>handleItemClick(index)}
+              />
+            ))}
         </Grid>
       </GridArea>
     </Container>
