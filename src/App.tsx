@@ -1,5 +1,6 @@
 import { Container, GridArea, Info, InfoArea, LogoLink } from "./App.styles";
 import logoImage from './assets/devmemory_logo.png';
+import { InfoItem } from "./components/InfoItem";
 
 
 
@@ -12,9 +13,10 @@ const App = () => {
         </LogoLink>
 
         <InfoArea>
-          ...
+          <InfoItem label="Tempo" value="00:00" />
+          <InfoItem label="Movimentos" value="0" />
         </InfoArea>
-
+        
         <button>Reiniciar</button>
       </Info>
       <GridArea>
