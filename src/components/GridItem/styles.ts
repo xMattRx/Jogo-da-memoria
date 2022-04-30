@@ -4,7 +4,7 @@ type ContainerProps = {
   showBackground: boolean;
 }
 export const Container = styled.div<ContainerProps>`
-  background-color: ${props => props.showBackground === true ? '#1550FF' : '#E2E3E3'}
+  background-color: #1550FF;
   height: 100px;
   border-radius: 20px;
   display: flex;
